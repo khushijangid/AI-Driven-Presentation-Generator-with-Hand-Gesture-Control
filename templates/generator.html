@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="generate-showcase">
+    <form id="generate-form" method="POST" action="{{ url_for('generate') }}" style="width: 50%; background-color: black; padding-top:30px; padding: 20px; margin-top: -30px;">
+        <h1>HandWave Presentations</h1>
+        <label class="text-for-info" for="presentation_title">Enter the Title *</label>
+        <input required type="text" id="presentation_title" name="presentation_title" required style="opacity: 0.8; border-radius: 25px;">
+        <div class="required-text" id="presentation_title_required" style="color: red;"> </div>
+
+        <label class="text-for-info" for="presenter_name" >Enter the Presentors' Names *</label>
+        <input required type="text" id="presenter_name" name="presenter_name" required style="opacity: 0.8; border-radius: 25px;">
+        <div class="required-text" id="presenter_name_required" style="color: red;"></div>
+
+        <label class="text-for-info" for="number_of_slide">Enter the number of slides *</label>
+        <input required type="number" id="number_of_slide" name="number_of_slide" required style="opacity: 0.8; border-radius: 25px;">
+        <div class="required-text" id="number_of_slide_required" style="color: red;"></div>
+
+        <label id="enter-your-content" for="user_text">Enter the description *</label>
+        <textarea required id="user_text" name="user_text" required style="opacity: 0.8; border-radius: 25px;"></textarea>
+        <div class="required-text" id="user_text_required" style="color: red;"></div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="insert_image" name="insert_image">
+            <label class="form-check-label" for="insert_image">
+                Insert image automatically
+            </label>
+        </div>
+
+        <div class="template-choice text-for-info">
+            Choose a template:<br><br>
+            <input type="radio" id="simple" name="template_choice" value="simple" checked >
+            <label for="simple" >Basic</label>
+            <input type="radio" id="bright_modern" name="template_choice" value="bright_modern">
+            <label for="bright_modern">Bright</label>
+            <input type="radio" id="dark_modern" name="template_choice" value="dark_modern">
+            <label for="dark_modern">Dark</label>
+        </div>
+
+        <button class="btn btn-success" id="generate-button" type="submit" style="margin-left: 0px;  border-radius: 25px; font-size: 30px;">Generate your presentation!</button>
+    </form>
+    <!-- Modal -->
+    <div class="modal" id="modal-generate">
+        <div class="modal-content" >
+          <div class="modal-body" style="display: none;">
+              <div id="holder"></div>
+              <div id="loading-indicator">
+                <h1 style="margin-top: 50px;">Generated your presentation...</h1>
+              </div>
+              <div class="generated-header" style="margin-top: 30px;">
+                <!-- <div class="generated-header btn btn-success"><a href="{{ url_for('download_file', filename='generated_presentation.pptx') }}">Click to Download</a></div> -->
+                <button class="button-78" onclick=window.location.href="{{ url_for('download_file', filename='generated_presentation.pptx') }}">
+                    Click to Download
+                </button>
+                
+            </div>
+          </div>
+          <div class="modal-alt" >
+            <div id="holder"></div>
+            <div id="loading-indicator">
+              <h1 style="margin-top: 50px;">Generating your presentation...</h1>
+            </div>
+          </div>
+        </div>
+    </div>
+
+<script>
+    // Function to show modal-body div and hide modal-alt div
+function showBodyAndHideAlt() {
+    // Get the modal-body and modal-alt div elements by their class names
+    var modalBody = document.querySelector('.modal-body');
+    var modalAlt = document.querySelector('.modal-alt');
+    
+    // Show modal-body
+    modalBody.style.display = 'block';
+    // Hide modal-alt
+    modalAlt.style.display = 'none';
+}
+
+
+setTimeout(showBodyAndHideAlt, 10000); 
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock content %}
+
+
+
+
+

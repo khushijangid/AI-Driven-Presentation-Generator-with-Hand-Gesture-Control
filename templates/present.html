@@ -1,0 +1,35 @@
+<!-- <div>
+    <form action = "/upload" method = "POST"  enctype = "multipart/form-data">
+    <input type = "file" name = "file" />
+    <input type = "submit"/>
+    </form>
+</div> -->
+{% extends "layout.html" %}
+{% block content %}
+<div class="generate-showcase" style="width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center;">
+    <form id="present-form" method="POST" enctype = "multipart/form-data" action="{{ url_for('present') }}" style="width: 50%; background-color: rgba(0,0,0,0.5); padding-top:30px; padding: 20px; margin-top: -30px; border-radius: 25px;">
+        <input type = "file" name = "myFile" id="myFile" style="margin-bottom: 20px; border: 2px solid white; border-radius: 25px; color: beige;"/>
+        <button class="btn btn-success" type="submit" style="margin-left: 0px;  border-radius: 25px; font-size: 30px;">Ready to present!</button>
+    </form>
+</div>
+<script>
+    document.getElementById('myFile').addEventListener('change', function () {
+        // Get the file input element
+        var fileInput = document.getElementById('myFile');
+        // Get the selected file
+        var file = fileInput.files[0];
+        // Get the file name
+        var filename = file.name;
+        // Get the file extension
+        var fileExtension = filename.split('.').pop().toLowerCase();
+        
+        // Check if the file extension is not ppt or pptx
+        if (!(fileExtension === 'ppt' || fileExtension === 'pptx')) {
+            // Print error message
+            alert("Error: Please upload a PowerPoint file (PPT or PPTX).");
+            // Clear the file input
+            fileInput.value = "";
+        }
+    });
+</script>
+{% endblock content %}
